@@ -24,8 +24,8 @@ public class MainMenu : MonoBehaviour
         }
     }
     public void QuitMaze(){
-        UnityEditor.EditorApplication.isPlaying = false;
+     //   UnityEditor.EditorApplication.isPlaying = false;
         Debug.Log("Quit Game");
-       // Application.Quit();
+       Application.Quit();
     }
 }
