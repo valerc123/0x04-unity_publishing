@@ -14,7 +14,8 @@ public class MainMenu : MonoBehaviour
         
     }
     public void PlayMaze(){
-        SceneManager.LoadScene("maze");
+        //SceneManager.LoadScene("maze");
+        SceneManager.LoadScene("mazeAndroid");
         if(colorblindMode.GetComponent<Toggle>().isOn == true){
             trapMat.color = new Color(255, 112, 0, 1);
             goalMat.color = Color.blue;

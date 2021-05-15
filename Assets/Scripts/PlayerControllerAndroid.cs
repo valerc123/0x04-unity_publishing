@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerControllerAndroid : MonoBehaviour
 {
     public float speed;
     public Rigidbody rb;
@@ -15,12 +15,16 @@ public class PlayerController : MonoBehaviour
     public Text healthText;
     public Text winLostText;
     public GameObject winLostImage;
+    private bool moveLeft;
+    private bool moveRight;
+    private bool moveForward;
+    private bool moveBack;
     void Start()
     {
         winLostImage = GameObject.Find("WinLoseBG");
         winLostImage.SetActive(false);
         rb = GetComponent<Rigidbody>();
-        speed = 10f;
+        speed = 1000f;
     }
     void SetScoreText(){
         scoreText.text = "Score: " + score.ToString();
@@ -42,30 +46,35 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(LoadScene(3));
         }
 
-        if(Input.GetKey(KeyCode.Escape)){
-            SceneManager.LoadScene("menu");
-        }
+        
+
     }
     IEnumerator LoadScene(float seconds){
        yield return new WaitForSeconds(seconds);
-       SceneManager.LoadScene("maze");
+         SceneManager.LoadScene("mazeAndroid");
     }
-    public void FixedUpdate(){
-        if(Input.GetKey(KeyCode.A)){
-            rb.AddForce(Vector3.left);
+   
+            public void escapebutton (int escape){
+            if(escape == 4){
+            SceneManager.LoadScene("menu");
         }
-        else if(Input.GetKey(KeyCode.W)){
-            rb.AddForce(Vector3.forward);
-        }
-        else if(Input.GetKey(KeyCode.S)){
-            rb.AddForce(Vector3.back);
-        }
-        else if(Input.GetKey(KeyCode.D)){
-            rb.AddForce(Vector3.right);
-        }
-    }
 
- 
+}
+    public void movebuttos (int button){
+        if(button == 0){
+            rb.AddForce(Vector3.left*10);
+            Debug.Log ("left");
+        }
+        else if(button == 1){
+            rb.AddForce(Vector3.forward*10);
+        }
+        else if(button == 2){
+            rb.AddForce(Vector3.back*10);
+        }
+        else if(button == 3){
+            rb.AddForce(Vector3.right*10);
+        }
+    }
 
     void OnTriggerEnter(Collider other){
         if (other.tag == "Pickup"){
